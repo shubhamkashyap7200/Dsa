@@ -101,7 +101,18 @@ public struct LinkedList<Value> {
         return currentNode
     }
     
-//    public mutating func insert(after: )
+    @discardableResult
+    public mutating func insert(_ value: Value, after node : Node<Value>?) -> Node<Value>? {
+        guard let tail = tail else { print("Tail is nil"); return nil}
+        
+        guard tail !== node else {
+            append(value)
+            return tail
+        }
+        
+        node?.next = Node(value: value, next: node?.next)
+        return node?.next
+    }
 }
 
 extension LinkedList: CustomStringConvertible {
@@ -126,4 +137,10 @@ print(numberLinkedList)
 numberLinkedList.append(34)
 print(numberLinkedList)
 
-numberLinkedList.node(at: 2)
+var savedNode = numberLinkedList.node(at: 1)
+print(numberLinkedList)
+
+print("-----")
+
+numberLinkedList.insert(007, after: savedNode)
+print(numberLinkedList)
