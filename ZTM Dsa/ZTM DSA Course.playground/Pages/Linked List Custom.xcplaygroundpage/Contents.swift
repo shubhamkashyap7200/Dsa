@@ -102,7 +102,7 @@ public struct LinkedList<Value> {
     }
     
     @discardableResult
-    public mutating func insert(_ value: Value, after node : Node<Value>?) -> Node<Value>? {
+    public mutating func insert(_ value: Value, after node : inout Node<Value>?) -> Node<Value>? {
         guard let tail = tail else { print("Tail is nil"); return nil}
         
         guard tail !== node else {
@@ -141,6 +141,6 @@ var savedNode = numberLinkedList.node(at: 1)
 print(numberLinkedList)
 
 print("-----")
-
-numberLinkedList.insert(007, after: savedNode)
+ 
+numberLinkedList.insert(777, after: &savedNode)
 print(numberLinkedList)
