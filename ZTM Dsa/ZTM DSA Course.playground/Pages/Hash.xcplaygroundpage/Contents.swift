@@ -14,7 +14,7 @@ import Foundation
 
 func findDuplicate(_ nums: [Int]) -> Int? {
     
-    var dict = [Int:Int]()L
+    var dict = [Int:Int]()
     
     for num in nums {
         dict[num] = (dict[num] ?? 0) + 1

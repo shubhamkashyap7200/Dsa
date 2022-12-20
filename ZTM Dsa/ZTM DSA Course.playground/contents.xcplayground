@@ -3,5 +3,6 @@
     <pages>
         <page name='Flow'/>
         <page name='Hash'/>
+        <page name='Linked List Custom'/>
     </pages>
 </playground>
