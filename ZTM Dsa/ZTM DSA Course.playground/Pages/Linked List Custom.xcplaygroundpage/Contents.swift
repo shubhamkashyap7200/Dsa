@@ -134,6 +134,18 @@ public struct LinkedList<Value> {
         node?.next = Node(value: value, next: node?.next)
         return node?.next
     }
+    
+    @discardableResult
+    public mutating func pop() -> Value? {
+        defer {
+            head = head?.next
+            if isEmpty {
+                tail = nil
+            }
+        }
+        
+        return head?.value
+    }
 }
 
 extension LinkedList: CustomStringConvertible {
@@ -170,3 +182,6 @@ numberLinkedList.push(404)
 print(numberLinkedList)
 
 numberLinkedList.count
+
+numberLinkedList.pop()
+print(numberLinkedList)
