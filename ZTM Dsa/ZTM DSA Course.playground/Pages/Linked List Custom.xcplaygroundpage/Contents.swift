@@ -58,10 +58,28 @@ public struct LinkedList<Value> {
 
     public init() {}
     
+     // isempty
     public var isEmpty: Bool {
         return head == nil
     }
     
+    // count
+    public var count: Int {
+        
+        guard var node = head else {
+            return 0
+        }
+        
+        var count = 1
+        while let next = node.next {
+            node = next
+            count += 1
+        }
+        
+        return count
+    }
+    
+    // push on the first
     public mutating func push(_ value: Value) {
         // 1
         head = Node(value: value, next: head)
@@ -72,6 +90,7 @@ public struct LinkedList<Value> {
         }
     }
     
+        // append at the last
     public mutating func append(_ value: Value) {
         
         // 1
@@ -87,6 +106,7 @@ public struct LinkedList<Value> {
         tail = tail?.next
     }
     
+    // get index any specific node
     public func node(at index: Int) -> Node<Value>? {
         // 1
         var currentNode = head
@@ -101,6 +121,7 @@ public struct LinkedList<Value> {
         return currentNode
     }
     
+    // insert after specific node
     @discardableResult
     public mutating func insert(_ value: Value, after node : inout Node<Value>?) -> Node<Value>? {
         guard let tail = tail else { print("Tail is nil"); return nil}
@@ -144,3 +165,8 @@ print("-----")
  
 numberLinkedList.insert(777, after: &savedNode)
 print(numberLinkedList)
+
+numberLinkedList.push(404)
+print(numberLinkedList)
+
+numberLinkedList.count
