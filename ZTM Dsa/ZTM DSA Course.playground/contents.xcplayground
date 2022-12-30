@@ -4,5 +4,8 @@
         <page name='Flow'/>
         <page name='Hash'/>
         <page name='Linked List Custom'/>
+        <page name='Queue'/>
+        <page name='Stacks using Arrays'/>
+        <page name='Stacks using Linked Lists'/>
     </pages>
 </playground>

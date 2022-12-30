@@ -49,16 +49,16 @@ print(node1)
 
 public struct LinkedList<Value> {
     // MARK: - Properties
-
+    
     public var head: Node<Value>?
     public var tail: Node<Value>?
     
     
     // MARK: - Methods
-
+    
     public init() {}
     
-     // isempty
+    // isempty
     public var isEmpty: Bool {
         return head == nil
     }
@@ -90,7 +90,7 @@ public struct LinkedList<Value> {
         }
     }
     
-        // append at the last
+    // append at the last
     public mutating func append(_ value: Value) {
         
         // 1
@@ -146,7 +146,56 @@ public struct LinkedList<Value> {
         
         return head?.value
     }
+    
+    @discardableResult
+    public mutating func removeLast() -> Value? {
+        // 1
+        guard let head = head else { return nil }
+        
+        // 2
+        guard head.next != nil else { return pop() }
+        
+        // 3
+        var previous = head
+        var current = head
+        
+        while let next = current.next {
+            previous = current
+            current = next
+        }
+        
+        // 4
+        previous.next = nil
+        tail = previous
+        return current.value
+    }
+    
+    @discardableResult mutating func remove(after node: Node<Value>) -> Value? {
+        defer {
+            if node.next === tail {
+                tail = node
+            }
+            
+            node.next = node.next?.next
+        }
+        return node.next?.value
+    }
+    
+    func reverseList() -> Node<Value>? {
+        var prev: Node<Value>? = nil
+        var headNode = head
+        
+        while headNode != nil {
+            let nextHead = headNode?.next
+            headNode?.next = prev
+            prev = headNode
+            headNode = nextHead
+        }
+        
+        return prev
+    }
 }
+
 
 extension LinkedList: CustomStringConvertible {
     public var description: String {
@@ -185,3 +234,23 @@ numberLinkedList.count
 
 numberLinkedList.pop()
 print(numberLinkedList)
+
+numberLinkedList.removeLast()
+print(numberLinkedList)
+
+
+numberLinkedList.push(256)
+numberLinkedList.push(388)
+numberLinkedList.push(124)
+numberLinkedList.append(180)
+
+numberLinkedList.remove(after: Node(value: 124))
+
+// appending
+numberLinkedList.append(2)
+numberLinkedList.pop()
+numberLinkedList.count
+print(numberLinkedList)
+
+
+numberLinkedList.reverseList()
