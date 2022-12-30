@@ -35,13 +35,16 @@ struct Stack<T> {
 
     @discardableResult
     mutating func pop() -> T? {
-        let currentTop = top
+        guard let currentTop = top else { return nil }
+        
         top = top?.next
-        return currentTop?.value
+        return currentTop.value
     }
     
     func peek() -> T? {
-        return top?.value
+        guard let top = top else { return nil }
+        
+        return top.value
     }
 }
 
@@ -59,5 +62,6 @@ randomNumber.push(2)
 randomNumber.push(8.2)
 randomNumber.push(128.6)
 randomNumber.pop()
+randomNumber.peek()
 
 print(randomNumber)
