@@ -5,7 +5,8 @@
         <page name='Hash'/>
         <page name='Linked List Custom'/>
         <page name='Stacks using Arrays'/>
-        <page name='Queue'/>
         <page name='Stacks using Linked Lists'/>
+        <page name='Queue using Linked List'/>
+        <page name='Queue using Two Stacks'/>
     </pages>
 </playground>

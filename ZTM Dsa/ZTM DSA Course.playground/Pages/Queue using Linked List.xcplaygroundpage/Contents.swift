@@ -85,7 +85,7 @@ movieQueue.enqueue("Lily")
 movieQueue.enqueue("Lucius")
 movieQueue.enqueue("Sirius")
 movieQueue.enqueue("Peter")
-movieQueue.dequeue()
+//movieQueue.dequeue()
 movieQueue.isEmpty
 
 print(movieQueue)
