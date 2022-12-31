@@ -26,25 +26,34 @@ struct BinarySearchTree<T: Comparable>: CustomStringConvertible {
     }
     
     // MARK: - Methods
-    mutating public func insert(_ value: T) {
-        let newNode = Node(value: value)
+    mutating public func insert(_ element: T) {
+        let node = Node(value: element)
+        
         if let rootNode = rootNode {
-            var currentNode = rootNode
-            while true {
-                if value < currentNode.value {
-                    // Left
-                    guard let leftNode = currentNode.leftNode else { currentNode.leftNode = newNode; return }
-                    currentNode = leftNode
-                }
-                else {
-                    // Right
-                    guard let rightNode = currentNode.rightNode else { currentNode.rightNode = newNode; return }
-                    currentNode = rightNode
-                }
+            self.insert(rootNode, node)
+        }
+        else {
+            rootNode = node
+        }
+    }
+    
+    // RECURSIVE FUNCTIONS
+    private func insert(_ rootNode: Node<T>, _ node: Node<T>) {
+        if rootNode.value > node.value {
+            if let leftNode = rootNode.leftNode {
+                self.insert(leftNode, node)
+            }
+            else {
+                rootNode.leftNode = node
             }
         }
         else {
-            rootNode = newNode
+            if let rightNode = rootNode.rightNode {
+                self.insert(rightNode, node)
+            }
+            else {
+                rootNode.rightNode = node
+            }
         }
     }
 }
@@ -53,5 +62,6 @@ var newTree: BinarySearchTree<Int> = BinarySearchTree()
 newTree.insert(45)
 newTree.insert(56)
 newTree.insert(12)
+newTree.insert(14)
 
 print(newTree)
