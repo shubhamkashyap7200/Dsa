@@ -9,5 +9,7 @@
         <page name='Queue using Linked List'/>
         <page name='Queue using Two Stacks'/>
         <page name='Binary Tree'/>
+        <page name='Graph'/>
+        <page name='Algorithms'/>
     </pages>
 </playground>
