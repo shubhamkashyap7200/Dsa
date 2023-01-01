@@ -13,6 +13,12 @@ class Node<T> {
         self.leftNode = leftNode
         self.rightNode = rightNode
     }
+    
+    public func tranverseInOrder(visit: (T) -> Void) {
+        leftNode?.tranverseInOrder(visit: visit)
+        visit(value)
+        rightNode?.tranverseInOrder(visit: visit)
+    }
 }
 
 struct BinarySearchTree<T: Comparable>: CustomStringConvertible {
@@ -56,12 +62,50 @@ struct BinarySearchTree<T: Comparable>: CustomStringConvertible {
             }
         }
     }
+    
+    public func containsUsingFunctional(_ value: T) -> Bool {
+        guard let rootNode = rootNode else { return false }
+        var found = false
+        
+        rootNode.tranverseInOrder {
+            if $0 == value {
+                found = true
+            }
+        }
+        
+        return found
+    }
+    
+    public func contains(_ value: T) -> Bool {
+        //        guard let rootNode = rootNode else { return false }
+        var currentNode = rootNode
+        
+        while let node = currentNode {
+            if node.value == value {
+                return true
+            }
+            
+            if value < node.value {
+                currentNode = node.leftNode
+            }
+            
+            else {
+                if let rightNode  = node.rightNode {
+                    currentNode = rightNode
+                }
+            }
+        }
+        
+        return false
+    }
 }
 
 var newTree: BinarySearchTree<Int> = BinarySearchTree()
 newTree.insert(45)
 newTree.insert(56)
 newTree.insert(12)
-newTree.insert(14)
+
+newTree.containsUsingFunctional(15)
+newTree.contains(14)
 
 print(newTree)
